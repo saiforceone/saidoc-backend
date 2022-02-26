@@ -12,4 +12,8 @@ DATABASES = {
   }
 }
 
+GRAPHENE = {
+  "SCHEMA": "doctors_appointment_core.graph_ql_api.schema"
+}
+
 print("Started Doctor's Appointment booking system in development mode...")
