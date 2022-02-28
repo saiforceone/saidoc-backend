@@ -87,3 +87,6 @@ local_settings.py
 
 .env
 db.sqlite3
+settings/development.py
+settings/production.py
+settings/staging.py

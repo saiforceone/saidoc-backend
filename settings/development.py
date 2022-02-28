@@ -1,5 +1,9 @@
 from .base import *
 
+SECRET_KEY = "irN7GCzx1ym/7mXgpDqsJYCcj6fkfMSYeYfeohI29HjPeyaxxgJt2gkClXDZ39ue"
+
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+
 Debug = True
 
 DATABASES = {
