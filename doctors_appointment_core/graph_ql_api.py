@@ -2,6 +2,21 @@ import graphene
 from graphene_django import DjangoObjectType
 
 from .models import *
+from doctors_appointment_core.graphql_mutations import CoreMutations
+
+class AppointmentType(DjangoObjectType):
+
+  class Meta:
+    model = Appointment
+    fields = "__all__"
+
+
+class AppointmentNoteType(DjangoObjectType):
+
+  class Meta:
+    model = AppointmentNote
+    fields = "__all__"
+
 class CancellationReasonType(DjangoObjectType):
   class Meta:
     model = CancellationReason
@@ -21,6 +36,13 @@ class HealthFacilityType(DjangoObjectType):
     fields = "__all__"
 
 
+class HealthFacilityHourType(DjangoObjectType):
+
+  class Meta:
+    model = HealthFacilityHour
+    fields = "__all__"
+
+
 class SpecialistType(DjangoObjectType):
 
   class Meta:
@@ -33,6 +55,20 @@ class SpecializationType(DjangoObjectType):
   class Meta:
     model = Specialization
     fields = "__all__"
+
+
+class UserProfileType(DjangoObjectType):
+
+  class Meta:
+    model = UserProfile
+    fields = "__all__"
+
+
+class UserType(DjangoObjectType):
+
+  class Meta:
+    model = User
+    fields = ("id", "email", "username")
 
 class Query(graphene.ObjectType):
   all_cancellation_reasons = graphene.List(CancellationReasonType)
@@ -83,4 +119,78 @@ class Query(graphene.ObjectType):
     except Exception:
       return None
 
-schema = graphene.Schema(query=Query)
+  # -- health facility hours
+  hours_by_facility = graphene.List(
+    HealthFacilityHourType,
+    facility=graphene.String(required=True)
+  )
+
+  def resolve_hours_by_facility(root, info, facility):
+    if not facility:
+      return None
+
+    try:
+      return HealthFacilityHour.objects.filter(related_facility=facility)
+    except:
+      return None
+
+  # -- appointments
+  # TODO make use of Django-filter to allow for more granular filtering of appointments
+  appointments_for_user = graphene.List(AppointmentType)
+
+  def resolve_appointments_for_user(root, info):
+    if not info.context.user.is_authenticated:
+      return None
+    else:
+      return Appointment.objects.filter(patient=info.context.user.id)
+
+  # -- appointment notes
+  appointment_notes_for_appt = graphene.List(
+    AppointmentNoteType,
+    appointment=graphene.String(required=True)
+  )
+
+  def resolve_appointment_notes_for_appt(root, info, appointment):
+    if not info.context.user.is_authenticated:
+      return None
+    elif not appointment:
+      return None
+    else:
+      try:
+        appt = Appointment.objects.get(id=appointment, patient=info.context.user.id)
+        return AppointmentNote.objects.filter(related_appointment=appt.id)
+      except Exception:
+        return None
+
+  # user profiles --
+  current_user_profile = graphene.Field(UserProfileType)
+
+  def resolve_current_user_profile(root, info):
+    if not info.context.user.is_authenticated:
+      return None
+    
+    try:
+      return UserProfile.objects.get(user=info.context.user)
+    except:
+      return None
+
+  all_user_profiles = graphene.List(UserProfileType)
+
+  def resolve_all_user_profiles(root, info):
+    if not info.context.user.is_authenticated:
+      return None
+
+    print(info.context.user.__dict__)
+
+    if not info.context.user.is_superuser:
+      return None
+
+    try:
+      return UserProfile.objects.all().exclude(user=info.context.user)
+    except:
+      return None
+
+schema = graphene.Schema(
+  query=Query,
+  mutation=CoreMutations
+)
