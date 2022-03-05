@@ -87,11 +87,11 @@ class Specialization(models.Model):
 class Appointment(models.Model):
   """Defines appointments that can be booked by patients(user)"""
   appointment_date = models.DateTimeField()
-  status = models.CharField(choices=APPOINTMENT_STATUSES, max_length=9)
+  status = models.CharField(choices=APPOINTMENT_STATUSES, max_length=12, default='booked')
   patient = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
   specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE)
   check_in_time = models.DateTimeField(blank=True, null=True)
-  duration_minutes = models.PositiveSmallIntegerField()
+  duration_minutes = models.PositiveSmallIntegerField(blank=False, null=True)
   cancelled_at = models.DateTimeField(blank=True, null=True)
 
   def __str__(self) -> str:
