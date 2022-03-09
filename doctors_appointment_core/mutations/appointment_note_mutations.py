@@ -1,14 +1,7 @@
 import graphene
-from graphene_django import DjangoObjectType
 
+from doctors_appointment_core.graphql_types import AppointmentNoteType
 from doctors_appointment_core.models import Appointment, AppointmentNote
-
-
-class AppointmentNoteType(DjangoObjectType):
-  class Meta:
-    model = AppointmentNote
-    fields = "__all__"
-
 
 class AppointmentNoteCreateMutation(graphene.Mutation):
   class Arguments:

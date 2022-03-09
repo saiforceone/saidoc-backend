@@ -1,13 +1,7 @@
 import graphene
-from graphene_django import DjangoObjectType
 
+from doctors_appointment_core.graphql_types import HealthFacilityHourType
 from doctors_appointment_core.models import HealthFacility, HealthFacilityHour
-
-class HealthFacilityHourType(DjangoObjectType):
-  class Meta:
-    model = HealthFacilityHour
-    fields = "__all__"
-
 
 class HealthFacilityHourMutation(graphene.Mutation):
   class Arguments:

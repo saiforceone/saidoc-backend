@@ -1,14 +1,7 @@
 import graphene
-from graphene_django import DjangoObjectType
 
+from doctors_appointment_core.graphql_types import SpecialistType
 from doctors_appointment_core.models import Specialist, HealthFacility
-
-
-class SpecialistType(DjangoObjectType):
-  class Meta:
-    model = Specialist
-    fields = "__all__"
-
 
 class SpecialistMutation(graphene.Mutation):
   class Arguments:

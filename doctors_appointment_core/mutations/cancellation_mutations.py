@@ -1,13 +1,7 @@
 import graphene
-from graphene_django import DjangoObjectType
 
+from doctors_appointment_core.graphql_types import CancellationReasonType
 from doctors_appointment_core.models import CancellationReason
-
-class CancellationReasonType(DjangoObjectType):
-  class Meta:
-    model = CancellationReason
-    fields = ("title", "description")
-
 
 class CreateCancellationReason(graphene.Mutation):
   class Arguments:

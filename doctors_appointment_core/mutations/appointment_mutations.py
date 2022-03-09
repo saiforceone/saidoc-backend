@@ -1,13 +1,8 @@
 import datetime
 import graphene
-from graphene_django import DjangoObjectType
 
+from doctors_appointment_core.graphql_types import AppointmentType
 from doctors_appointment_core.models import Appointment, Specialist, UserProfile
-
-class AppointmentType(DjangoObjectType):
-  class Meta:
-    model = Appointment
-    fields = "__all__"
 
 
 class AppointmentMutation(graphene.Mutation):

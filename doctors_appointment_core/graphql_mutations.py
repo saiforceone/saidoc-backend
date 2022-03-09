@@ -8,6 +8,7 @@ from .mutations.specialist_mutations import SpecialistMutation
 from .mutations.specialization_mutations import SpecializationMutation
 from .mutations.appointment_mutations import AppointmentMutation, AppointmentUpdateMutation, AppointmentCancellationMutation
 from .mutations.appointment_note_mutations import AppointmentNoteCreateMutation
+from .mutations.emergency_contact_mutations import EmergencyContactMutation
 
 
 class CoreMutations(graphene.ObjectType):
@@ -20,3 +21,5 @@ class CoreMutations(graphene.ObjectType):
   update_appointment = AppointmentUpdateMutation.Field()
   cancel_appointment = AppointmentCancellationMutation.Field()
   create_appointment_note = AppointmentNoteCreateMutation.Field()
+  create_emergency_contact = EmergencyContactMutation.Field()
+  
