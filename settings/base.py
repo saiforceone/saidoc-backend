@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'social_django',
     'graphene_django',
     # our apps
+    'auth0login',
     'doctors_appointment_core'
 ]
 
@@ -65,6 +66,11 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = {
+    'auth0login.auth0backend.Auth0',
+    'django.contrib.auth.backends.ModelBackend'
+}
 
 WSGI_APPLICATION = 'doctors_appointment_backend.wsgi.application'
 
