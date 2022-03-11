@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third-party
+    'social_django',
     'graphene_django',
     # our apps
     'doctors_appointment_core'
