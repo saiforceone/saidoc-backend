@@ -68,8 +68,8 @@ TEMPLATES = [
 ]
 
 AUTHENTICATION_BACKENDS = {
+    'django.contrib.auth.backends.ModelBackend',
     'auth0login.auth0backend.Auth0',
-    'django.contrib.auth.backends.ModelBackend'
 }
 
 WSGI_APPLICATION = 'doctors_appointment_backend.wsgi.application'
