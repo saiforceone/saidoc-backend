@@ -1,11 +1,15 @@
 <script>
+  import TailwindCss from './TailwindCSS.svelte';
   import logo from './assets/svelte.png'
   import Counter from './lib/Counter.svelte'
+
 </script>
+
+<TailwindCss />
 
 <main>
   <img src={logo} alt="Svelte Logo" />
-  <h1>Hello world!</h1>
+  <h1 class="text-2xl">Hello world!</h1>
 
   <Counter />
 
