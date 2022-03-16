@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'social_django',
     'graphene_django',
     # our apps
+    'dashboard',
     'auth0login',
     'doctors_appointment_core'
 ]
