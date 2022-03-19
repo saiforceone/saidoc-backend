@@ -8,4 +8,5 @@ export default {
     extend: {},
   },
   darkMode: false, // or 'media' or 'class'
+  mode: 'jit'
 }

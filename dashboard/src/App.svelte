@@ -1,11 +1,11 @@
 <script>
-  import TailwindCss from './TailwindCSS.svelte';
   import logo from './assets/svelte.png'
   import Counter from './lib/Counter.svelte'
+  import NavBar from './lib/navigation/NavBar.svelte';
 
 </script>
 
-<TailwindCss />
+<NavBar />
 
 <main>
   <img src={logo} alt="Svelte Logo" />

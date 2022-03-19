@@ -8,11 +8,8 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-svelte-csf"
   ],
-  // "framework": "@storybook/svelte",
-  "core": {
-    "builder": "storybook-builder-vite"
-  },
-  svelteOptions: {
-    preprocess: require("../svelte.config.cjs").preprocess
+  "framework": "@storybook/svelte",
+  "svelteOptions": {
+    "preprocess": require("../svelte.config.cjs").preprocess
   }
 }
