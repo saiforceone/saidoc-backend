@@ -5,7 +5,9 @@
 
 </script>
 
-<NavBar />
+<NavBar 
+  userProfile={{username: 'John Batman', relatedFacility: 'Example Office'}}
+/>
 
 <main>
   <img src={logo} alt="Svelte Logo" />
